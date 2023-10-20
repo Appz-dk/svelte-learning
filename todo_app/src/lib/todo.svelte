@@ -50,6 +50,13 @@
     width: 20px;
     aspect-ratio: 1;
     cursor: pointer;
+    height: fit-content;
+  }
+
+  .icon:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 1px;
+    border-radius: 4px;
   }
 
   .icon:hover {

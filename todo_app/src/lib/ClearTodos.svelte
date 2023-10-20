@@ -10,7 +10,21 @@
     const filteredTodos = todos.filter(todo => !todo.done)
     dispatch("clearDoneTodos", filteredTodos)
   }
+
+  const handleClearAllTodos = () => {
+    dispatch("showConfirmModal", true)
+  }
 </script>
 
+<div class="action-btns">
+  <button on:click={handleClearDoneTodos}>Clear done todos</button>
+  <button on:click={handleClearAllTodos}>Clear All</button>
+</div>
 
-<button on:click={handleClearDoneTodos}>Clear done todos</button>
+<style>
+  .action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 8px
+  }
+</style>
