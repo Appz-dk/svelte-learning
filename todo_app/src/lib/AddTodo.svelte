@@ -33,21 +33,6 @@
     gap: 8px;
   }
 
-  .add-todo button {
-    border-radius: 4px;
-    border: 1px solid transparent;
-    padding: .25rem .5rem;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-  }
-
-  .add-todo button:hover {
-    border-color: #646cff;
-  }
-
   .add-todo input {
     padding: .25rem .5rem;
   }
