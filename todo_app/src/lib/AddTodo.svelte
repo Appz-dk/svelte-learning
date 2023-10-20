@@ -14,6 +14,8 @@
     const newTodo = { id: String(todos.length + 1), text: todoText, done: false };
     // Dispatch a new custom event of addTodo
     dispatch('addTodo', newTodo);
+    // Clear input
+    todoText = ""
   }
 
 </script>
