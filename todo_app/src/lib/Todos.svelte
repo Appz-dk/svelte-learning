@@ -15,10 +15,10 @@
   const handleNewTodo = (event: CustomEvent<TodoType>) => {
     todos = [...todos, event.detail];
   }
-  
-  const handleRemoveDoneTodos = (event: CustomEvent<TodosType>) => {
+  const updateTodos = (event: CustomEvent<TodosType>) => {
     todos = event.detail
   }
+  
 </script>
 
 
@@ -26,11 +26,11 @@
 
 <ul class="todos-list">
   {#each todos as todo (todo.id)}
-  <Todo {todo} />
+  <Todo {todo} {todos} on:deleteTodo={updateTodos}/>
   {/each}
 </ul>
 
-<ClearDoneTodos {todos} on:clearDoneTodos={handleRemoveDoneTodos}/>
+<ClearDoneTodos {todos} on:clearDoneTodos={updateTodos}/>
 
 
 <style>

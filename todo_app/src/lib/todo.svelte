@@ -1,8 +1,16 @@
 <script lang="ts">
-  import type { TodoType } from "./Todos.svelte";
+  import type { TodoType, TodosType } from "./Todos.svelte";
   import FaRegTrashAlt from 'svelte-icons/fa/FaRegTrashAlt.svelte'
+  import { createEventDispatcher } from "svelte";
 
   export let todo: TodoType
+  export let todos: TodosType
+
+  const dispatch = createEventDispatcher()
+  const onDeleteTodo = (id: string) => {
+    const updatedTodos = todos.filter(todo => todo.id !== id)
+    dispatch("deleteTodo", updatedTodos)
+  }
 </script>
 
 <div class="todo-container">
@@ -10,9 +18,9 @@
     <input type="checkbox" bind:checked={todo.done} />
     {todo.text}
   </label>
-  <div class="icon">
+  <button class="icon" on:click={() => onDeleteTodo(todo.id)}>
     <FaRegTrashAlt />
-  </div>
+  </button>
 </div>
 
 
@@ -36,6 +44,7 @@
   }
 
   .icon {
+    all:unset;
     display: grid;
     place-items: center;
     width: 20px;
