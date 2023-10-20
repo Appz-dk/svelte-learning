@@ -1,21 +1,25 @@
 <script lang="ts">
-  import type { TodoType, TodosType } from "./Todos.svelte";
+  import { todosStore, type TodoType } from '../stores/todos';
   import FaRegTrashAlt from 'svelte-icons/fa/FaRegTrashAlt.svelte'
-  import { createEventDispatcher } from "svelte";
 
   export let todo: TodoType
-  export let todos: TodosType
 
-  const dispatch = createEventDispatcher()
   const onDeleteTodo = (id: string) => {
-    const updatedTodos = todos.filter(todo => todo.id !== id)
-    dispatch("deleteTodo", updatedTodos)
+    const updatedTodos = $todosStore.filter(todo => todo.id !== id)
+    todosStore.updateTodos(updatedTodos)
+  }
+
+  const handleToggleTodo = (id: string) => {
+    const updatedTodos = $todosStore.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo)    
+    todosStore.updateTodos(updatedTodos)
   }
 </script>
 
 <div class="todo-container">
   <label class:checked={todo.done}>
-    <input type="checkbox" bind:checked={todo.done} />
+    <!-- Better to not bind directly to a store value and instead update the done state in the handleToggleTodo -->
+    <!-- <input type="checkbox" bind:checked={todo.done} on:change={handleCheckTodo}/> -->  
+    <input type="checkbox" checked={todo.done} on:change={() => handleToggleTodo(todo.id)}/>
     {todo.text}
   </label>
   <button class="icon" on:click={() => onDeleteTodo(todo.id)}>

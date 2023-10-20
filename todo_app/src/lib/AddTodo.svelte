@@ -1,25 +1,21 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import type { TodosType } from "./Todos.svelte";
+  import { todosStore } from "../stores/todos";
 
   // Variables needed
-  export let todos: TodosType
   let todoText = ""
 
-  // Setup dispatch to listen to events
-  const dispatch = createEventDispatcher();
-
+  // Add todo to store
   const handleAddTodo = () => {
     if (!todoText) return
-    const newTodo = { id: String(todos.length + 1), text: todoText, done: false };
-    // Dispatch a new custom event of addTodo
-    dispatch('addTodo', newTodo);
+    todosStore.addTodo(todoText)
     // Clear input
     todoText = ""
   }
 
+  // allow user to add with Enter key
   const inputKeydown = (e: KeyboardEvent) => {
-    if (e.code === "Enter" && todoText) {
+    const isEnterKey = e.code === "Enter" || e.code === "NumpadEnter"
+    if (isEnterKey && todoText) {
       handleAddTodo()
     }
   }

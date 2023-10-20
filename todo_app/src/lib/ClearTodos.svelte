@@ -1,24 +1,26 @@
 <script lang="ts">
-  import type { TodosType } from "./Todos.svelte";
   import { createEventDispatcher } from "svelte";
+  import { todosStore } from "../stores/todos";
+  import { derived } from "svelte/store";
 
-  // Props
-  export let todos: TodosType
+  
+  // Update todosStore
+  const handleClearDoneTodos = () => {
+    const filteredTodos = $todosStore.filter(todo => !todo.done)
+    todosStore.updateTodos(filteredTodos)
+  }
+  const hasDoneTodos = derived(todosStore, $todosStore => $todosStore.some(todo => todo.done));
+
   // Event dispatcher
   const dispatch = createEventDispatcher()
-  const handleClearDoneTodos = () => {
-    const filteredTodos = todos.filter(todo => !todo.done)
-    dispatch("clearDoneTodos", filteredTodos)
-  }
-
   const handleClearAllTodos = () => {
     dispatch("showConfirmModal", true)
   }
 </script>
 
 <div class="action-btns">
-  <button on:click={handleClearDoneTodos}>Clear done todos</button>
-  <button on:click={handleClearAllTodos}>Clear All</button>
+  <button disabled={!$hasDoneTodos} on:click={handleClearDoneTodos}>Clear done todos</button>
+  <button disabled={!$todosStore.length} on:click={handleClearAllTodos}>Clear All</button>
 </div>
 
 <style>
