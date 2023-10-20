@@ -18,11 +18,16 @@
     todoText = ""
   }
 
+  const inputKeydown = (e: KeyboardEvent) => {
+    if (e.code === "Enter" && todoText) {
+      handleAddTodo()
+    }
+  }
 </script>
 
 
 <div class="add-todo">
-  <input bind:value={todoText}/>
+  <input bind:value={todoText} on:keydown={inputKeydown}/>
   <button on:click={handleAddTodo}>Add Todo</button>
 </div>
 
