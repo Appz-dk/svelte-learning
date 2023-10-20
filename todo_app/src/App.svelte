@@ -1,10 +1,11 @@
 <script lang="ts">
-  import Counter from './lib/Counter.svelte'
+  import Todos from "./lib/Todos.svelte"
 </script>
 
 <main>
   <div>
-    <h1>Hello world</h1>
+    <h1>Todo List</h1>
+    <Todos />
 </main>
 
 <style>
