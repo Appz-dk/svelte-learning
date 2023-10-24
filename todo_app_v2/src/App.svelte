@@ -36,10 +36,6 @@
     <Todos isDone={true} />
   </div>
 
-
-  <!-- Maybe Make action buttons add new, clear all -->
-
-
 </main>
 
 <style>
