@@ -1,12 +1,13 @@
 <script lang="ts">
-  export let text: string
-  export let done: boolean
+  import { todos, type TodoType } from "../stores/todoStore";
+
+  export let todo: TodoType
 </script>
 
 <li>
 <label class="todo-container">
-  <input type="checkbox" checked={done}/>
-    <span>{text}</span>
+  <input type="checkbox" checked={todo.done} on:change={() => todos.checkTodo(todo, !todo.done)}/>
+    <span>{todo.text}</span>
   </label>
 </li>
 

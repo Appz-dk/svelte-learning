@@ -6,8 +6,8 @@
 </script>
 
 <ul class="todos">
-  {#each $todos.filter(todo => todo.done === isDone) as {uid, text, done} (uid)}
-  <Todo text={text} done={done}/>
+  {#each $todos.filter(todo => todo.done === isDone) as todo (todo.uid)}
+  <Todo todo={todo}/>
   {/each}
 </ul>
 
