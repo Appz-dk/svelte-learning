@@ -7,16 +7,21 @@
 
   const handleAddTodo = () => {
     if (!todoText) return
-
     todos.addTodo(todoText)
     todoText = ""
+  }
+
+  const handleKeydown = (e: KeyboardEvent) => {
+    const isValid = e.code === "Enter" || e.code === "NumpadEnter"
+    if (!isValid || !todoText) return
+    handleAddTodo()
   }
 </script>
 
 <main>
   <!-- Add todo -->
   <div class="add-todo">
-    <input bind:value={todoText} placeholder="Add a new Todo"/>
+    <input bind:value={todoText} placeholder="Add a new Todo" on:keydown={handleKeydown}/>
     <button on:click={handleAddTodo}>Add Todo</button>
   </div>
   <!-- Not done todos -->
