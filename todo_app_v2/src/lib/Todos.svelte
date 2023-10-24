@@ -1,9 +1,14 @@
-<script>
+<script lang="ts">
+  import { todos } from "../stores/todoStore"
 
+  import Todo from "./Todo.svelte";
+  export let isDone: boolean;
 </script>
 
 <ul class="todos">
-  <slot name="todo" />
+  {#each $todos.filter(todo => todo.done === isDone) as {uid, text, done} (uid)}
+  <Todo text={text} done={done}/>
+  {/each}
 </ul>
 
 <style>
