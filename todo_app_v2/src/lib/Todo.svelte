@@ -9,6 +9,7 @@
 <label class:done class="todo-container">
   <input type="checkbox" checked={todo.done} on:change={() => todos.checkTodo(todo, !todo.done)}/>
   <span>{todo.text}</span>
+  <button class="remove-todo" on:click={() => todos.removeTodo(todo)} aria-label="Remove"/>
 </label>
 
 <style>
@@ -27,6 +28,20 @@
     width: 15px;
     aspect-ratio: 1;
     cursor: pointer;
+  }
+
+  .remove-todo {
+    all: unset;
+    width: 15px;
+    min-width: 15px;
+    aspect-ratio: 1;
+    background-image: url("../assets/remove.svg");
+    background-repeat: no-repeat;
+    margin-left: auto;
+  }
+
+  span {
+    margin-right: .5em
   }
 
   .done {
