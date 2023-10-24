@@ -9,8 +9,12 @@ export type TodoType = {
 let uid = 0
 
 const initialTodos = [
-  { text: "First todo", done: false },
-  { text: "Second todo", done: true }
+  { text: "Fix some bugs", done: false },
+  { text: "Walk the dog", done: false },
+  { text: "Learn Svelte", done: true },
+  { text: "Take out the trash", done: false },
+  { text: "Do the dishes", done: false },
+  { text: "Write some docs", done: true },
 ]
 
 const {subscribe, update} = writable(initialTodos.map(todo => {
